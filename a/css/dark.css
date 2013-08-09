@@ -1,0 +1,84 @@
+
+
+.theme-dark .show-loading .circle {
+    border-color: #444 #777;
+    box-shadow: 0 0 5px #444 inset, 0 0 5px #777;
+}
+.theme-dark .header .submenu {
+    background: #282828;
+}
+.theme-dark body {
+    background: #222;
+    color: #999;
+}
+.theme-dark .header h1 {
+    color: rgba(255,255,255,0.3);
+}
+
+.theme-dark .header .icon {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.2);
+}
+.theme-dark .pages-container .page {
+    background: #222;
+}
+.theme-dark .pages-container .pagebd-container {
+    background: #111;
+}
+.theme-dark a,
+.theme-dark .article-comments .author,
+.theme-dark .page-home .bd .comments {
+    color: #69c;
+}
+
+.theme-dark .page-home .bd li {
+    border-bottom: 1px solid  rgba(255,255,255,.07);
+}
+.theme-dark .page-home .bd .comments {
+    background: rgba(255,255,255,0.031);
+}
+.theme-dark .header a {
+    color: #888;
+}
+
+.theme-dark .article-meta h3,
+.theme-dark .page-home .bd h3 {
+    color: #aaa;
+}
+
+.theme-dark .page-home .bd .points {
+    background: rgba(255,255,255,0.031);
+}
+
+.theme-dark .page-home .bd a {
+    color: #777;
+}
+
+.theme-dark .page-article-content .article-content {
+    background: rgba(255,255,255,0.05);
+}
+
+.theme-dark .article-comments {
+    background: rgba(255,255,255,0.05);
+}
+
+.theme-dark .article-comments li {
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.theme-dark .article-comments ul ul {
+    border-left: 15px solid rgba(255,255,255,0.03);
+}
+.theme-dark .article-comments ul ul ul{
+    border-color: rgba(255,255,255,0.05);
+}
+.theme-dark .article-comments ul ul ul ul {
+    border-color: rgba(255,255,255,0.07);
+}
+.theme-dark .article-comments ul ul ul ul ul {
+    border-color: rgba(255,255,255,0.09);
+}
+
+.theme-dark .article-comments .op .text {
+    background: #69c;
+    color: #fff;
+}

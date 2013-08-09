@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" class="web">
+<head>
+    <meta charset="utf-8"/>
+    <script>t0=+new Date();</script>
+    <title>Hacker News</title>
+    <meta name="viewport"
+          content="initial-scale=1.0, user-scalable=0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+
+    <script>
+        (function(){
+            if (window.location.hash.indexOf('close_window') > -1) window.close();
+
+            var parseUa = function(ua) {
+                    var classNames = '';
+                    ua = ua.toLowerCase();
+                    if (ua.indexOf('chrome') > -1 && ua.indexOf('win') > -1) {
+                        classNames += " win-chrome";
+                    }
+
+                    else if (ua.match(/(iphone|ipod|ipad)/)) {
+                        classNames += " ios";
+                    }
+
+                    else if (ua.match(/MSIE\s([\d]+)/i || ua.match(/trident/))) {
+                        classNames += " ie"
+                                + (ua.match(/IEMobile\/([\d]+)/i) ? " ie-mobile" : "")
+                                + (ua.match(/touch/) ? " ie-touch" : "");
+                    }
+
+                    else if  (ua.match(/(android)/)) {
+                        classNames += " android" ;
+                        if (ua.match(/firefox/)) {
+                            classNames += ' firefox';
+                        }
+                        else {
+                            classNames += " " + (/android 2\.3/.test(ua) ? " android-2-3" : "")
+                                    + ( ua.match(/chrome/)  ? ' android-chrome' : ' android-browser');
+                        }
+                    }
+                    return classNames;
+                },
+                ua = navigator.userAgent.toLowerCase(),
+                htmlNode = document.querySelector('html');
+
+            htmlNode.className = htmlNode.className + " " + parseUa(ua);
+        }());
+    </script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/>
+<link rel="stylesheet" type="text/css" href="a/css/glyph/style.css"/>
+<link rel="stylesheet" type="text/css" href="a/css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="a/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="a/css/pages.css"/>
+<link rel="stylesheet" type="text/css" href="a/css/dark.css"/>
+
+
+    
+
+    <link rel="icon" type="image/png" href="a/icon/ios/Icon-Small-50.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="a/icon/ios/Icon-72@2x.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="a/icon/ios/Icon@2x.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="a/icon/ios/Icon-72.png"/>
+    <link rel="apple-touch-icon-precomposed" href="a/icon/ios/Icon.png"/>
+
+    <link rel="shortcut icon" href="a/favicon_32.ico" />
+
+    <style>
+        a:focus,
+        a:active {
+            outline: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="touch">
+
+    <div class="pages-container">
+        <div class="page page-home show-page">
+            <div class="header-container">
+                <header class="header">
+                    <ul class="l-menu list-inline menu">
+                        <li>
+                            <a href="#" class="toggle-submenu"><span class="icon icon-settings"></span></a>
+                            <ul class="submenu">
+                                <li><a href="#" class="filter-fp">Hacker News</a></li>
+                                <li><a href="#" class="filter-ask-hn">Ask HN</a></li>
+                                <li><a href="#" class="filter-show-hn">Show HN</a></li>
+                                <li><a href="#" class="filter-today-top-10">Top 10 (Today)</a></li>
+                                <li><a href="#" class="filter-yesterday-top-10">Top 10 (Yesterday)</a></li>
+                                <li><a href="#" class="filter-week-top-10">Top 10 (Last 7 days)</a></li>
+                                <li><a href="#" class="show-settings">Settings</a></li>
+                                <!--li><a href="#" class="show-about">About</a></li-->
+                                <li><a href="#" class="show-performance">Performance</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                            <h1>Hacker News</h1>
+                    <ul class="r-menu list-inline menu">
+                        <li><a href="#" class="reload"><span class="icon icon-refresh"></span></a></li>
+                    </ul>
+                </header>
+            </div>
+            <section class="pagebd-container">
+                <div class="bd">
+                    <br><div class="show-loading"><div class="circle"></div><br>Loading...</div>
+                </div>
+            </section>
+        </div>
+
+        <div class="page page-article-content" data-page="page-article-content">
+
+        </div>
+
+        <div class="page page-article-comments" data-page="page-article-comments">
+
+        </div>
+        <div class="page page-performance">
+
+        </div>
+        <div class="page page-settings">
+
+        </div>
+        <div class="page page-about">
+
+        </div>
+    </div>
+
+</div>
+<div class="mobile"></div>
+<div id="loading">
+    <div class="circle"></div>
+</div>
+
+<div class="touch-layer disable-touch-move"></div>
+
+<script type="text/x-premii" class="template-list-item">
+    <li data-id="{id}" class="">
+        <a href="#/article/{id}" class="story {visitedArticle}" data-hn="{self}">
+            <h3>{title}</h3>
+
+            <span class="points">{points}</span>
+            <span class="author">{user}</span>
+            <span class="time-ago">{time_ago}</span>
+            <span class="url">{urlTitle}</span>
+        </a>
+        <a href="#/comments/{id}" class=" comments {visitedComments}">
+            <span class="icon icon-bubble"></span>{comments_count}
+        </a>
+    </li>
+</script>
+
+
+
+<script type="text/x-premii" class="template-page-article">
+
+    <div class="header-container">
+        <header class="header">
+            <div class="l-menu "><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+            <h1>Article</h1>
+            <div class="r-menu"><a href="#/comments/{id}" class="show-comments" data-id="{id}"><span class="icon icon-bubble"></span></a></div>
+        </header>
+    </div>
+
+    <section class="pagebd-container">
+        <div class="bd">
+            <div class="article-meta article-self-{self}">
+                <h3 class="title">{title}</h3>
+                <span class="points">{points}</span>
+                <span class="author"> {user}</span></span>
+                <span class="time-ago">{time_ago}</span>
+                <span class="comments-count"><sapn class="icon icon-bubble"></sapn>{comments_count}</span>
+                <a class="url article-url" href="{url}" onclick="window.open('{url}', '_blank'); return false;"><span class="icon icon-export"></span> {url}</a>
+                <a class="url hn-url" href="https://news.ycombinator.com/item?id={id}" onclick="window.open('https://news.ycombinator.com/item?id={id}', '_blank'); return false;"><span class="icon icon-export"></span> news.ycombinator.com/item?id={id}</a>
+            </div>
+            <div class="article-content"><br><div class="show-loading"><div class="circle"></div><br>Loading...</div></div>
+        </div>
+    </section>
+
+</script>
+
+
+
+
+<script type="text/x-premii" class="template-page-article-comments">
+
+    <div class="header-container">
+        <header class="header">
+            <div class="l-menu "><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+            <h1>Comments ({comments_count})</h1>
+            <ul class="r-menu list-inline menu">
+                <li>
+                    <a href="#/article/{id}" class="show-article article-self-{self}" data-id="{id}"><span class="icon icon-newspaper"></span></a>
+                </li>
+            </ul>
+        </header>
+    </div>
+
+    <section class="pagebd-container">
+        <div class="bd">
+            <div class="article-meta article-self-{self}">
+                <h3 class="title">{title}</h3>
+                <span class="points">{points}</span>
+                <span class="author"> {user}</span>
+                <span class="time-ago">{time_ago}</span>
+                <span class="comments-count"><sapn class="icon icon-bubble"></sapn>{comments_count}</span>
+                <a class="url article-url" href="{url}" onclick="window.open('{url}', '_blank'); return false;"><span class="icon icon-export"></span> {url}</a>
+                <a class="url hn-url" href="https://news.ycombinator.com/item?id={id}" onclick="window.open('https://news.ycombinator.com/item?id={id}', '_blank'); return false;"><span class="icon icon-export"></span> news.ycombinator.com/item?id={id}</a>
+                <div class="text op-comment">{content}</div>
+            </div>
+            <div class="article-comments"><br><div class="show-loading"><div class="circle"></div><br>Loading...</div></div>
+        </div>
+    </section>
+
+</script>
+
+
+<script type="text/x-premii" class="template-comment-item">
+    <li>
+        <div class="comment-meta">
+            <span class="author {opClass}"><span class="icon icon-user"></span><span class="text"> {user}</span></span>
+            <time class="time-ago"><span class="icon icon-hourglass"></span><span class="text"> {time_ago}</span></time>
+        </div>
+        <div class="comment {readClass}">
+            {content}
+        </div>
+        {child_comments}
+    </li>
+</script>
+
+
+
+
+<script type="text/x-premii" class="template-page-performance">
+
+    <div class="header-container">
+        <header class="header">
+            <div class="l-menu"><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+            <h1>Performance</h1>
+        </header>
+    </div>
+
+    <section class="pagebd-container">
+        <div class="bd">
+
+        </div>
+    </section>
+
+</script>
+
+
+
+<script type="text/x-premii" class="template-page-settings">
+
+    <div class="header-container">
+        <header class="header">
+            <div class="l-menu"><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+            <h1>Settings</h1>
+        </header>
+    </div>
+
+    <section class="pagebd-container">
+        <div class="bd">
+            <h4>Themes</h4>
+            <ul class="theme-{theme} list">
+                <li><a href="#" class="change-theme" data-theme="default">Hacker News (default)</a></li>
+                <li><a href="#" class="change-theme" data-theme="dark">Dark</a></li>
+            </ul>
+            <h4>Font Size</h4>
+            <ul class="theme-{theme} list">
+                <li><a href="#" class="change-font-size" data-font-size="small">Small</a></li>
+                <li><a href="#" class="change-font-size" data-font-size="normal">Normal (default)</a></li>
+                <li><a href="#" class="change-font-size" data-font-size="large">Large</a></li>
+            </ul>
+            <h4>Auto collapse read comments</h4>
+            <ul class="read-comment-{status} list">
+                <li><a href="#" class="change-read-comment" data-value="yes">Yes</a></li>
+                <li><a href="#" class="change-read-comment" data-value="no">No</a></li>
+            </ul>
+            <div class="version">0.1</div>
+        </div>
+    </section>
+
+</script>
+
+<script type="text/x-premii" class="css-style css-style-android">
+
+</script>
+
+<script type="text/x-premii" class="css-style css-style-wp8">
+    @media all and (orientation:portrait) {
+        @-ms-viewport {
+            width:320px;
+            user-zoom: fixed;
+            max-zoom: 1;
+            min-zoom: 1;
+        }
+    }
+
+    @media all and (orientation:landscape) {
+        @-ms-viewport {
+            width:480px;
+            user-zoom: fixed;
+            max-zoom: 1;
+            min-zoom: 1;
+        }
+    }
+
+    @-ms-viewport {
+        width:auto!important;
+    }
+</script>
+
+<script type="text/x-premii" class="css-style css-style-w8">
+    @-ms-viewport {
+        width: device-width;
+    }
+</script>
+
+
+
+</body>
+
+
+<script type="text/javascript">
+
+    window.$hn = {
+        "version": 2,
+        "nativeApp": !!"0",
+        "iScrollEnable": false,
+        "apikey": 'localhost.com',
+        "url" : {
+            "stories" : "http://ng.premii.com:8080",
+            "share" : "http://hn.premii.com",
+            "readability": "a/read/sample.txt"
+        },
+        "v": {
+            "js": 0.16,
+            "css": 0.05,
+            "app": 2
+        },
+        "hnid": null
+    };
+
+    $hn.url.storiesBackup = $hn.url.stories;
+
+    (function($hn){
+        'use strict';
+        var onError = function (message, jsurl, lineNumber) {
+            console.log(arguments);
+            return false;
+        };
+        $hn.onError = onError;
+
+    }(window.$hn));
+
+</script>
+
+<script id="last">
+
+    var cssStyle = function(css) {
+        var head = document.querySelector('head'),
+                style = document.createElement('style');
+
+        style.type = 'text/css';
+        if (style.styleSheet){
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        head.appendChild(style);
+    };
+
+
+    var t1 = +new Date();
+
+</script>
+
+<script src="a/js/lib.js"></script>
+<script src="a/js/helper.js"></script>
+<script src="a/js/data.js"></script>
+<script src="a/js/ui.js"></script>
+
+
+
+<script type="text/javascript">
+    PubSub.publish('load-home');
+    (function($hn) {
+        window.setTimeout(function() {
+            if (!$hn || !$hn.perf || !$hn.perf.update) {
+                return;
+            }
+            var tfinal = +new Date(),
+                perf = $hn.perf,
+                timing;
+
+
+            if (window.performance) {
+                timing = window.performance.timing;
+                perf.update('page', 'pageLoadTime', timing.loadEventEnd - timing.navigationStart);
+                perf.update('page', 'serverTime', timing.responseEnd - timing.requestStart);
+                perf.update('page', 'onLoadTime',  timing.loadEventEnd - timing.responseStart);
+            }
+            perf.update('page', 'html-load', tfinal - t0);
+            perf.update('page', 'js-load', t1 - t0);
+
+        }, $hn.nativeApp ? 100 : 10);
+
+    }($hn));
+
+</script>
+</html>
+

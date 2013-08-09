@@ -1,0 +1,456 @@
+.touch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.pages-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+.pages-container .page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f60;
+    opacity: 1;
+    z-index: 1;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    -webkit-transition: -webkit-transform 400ms ease, opacity 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
+.android-chrome .pages-container .page {
+    display: none;
+    -webkit-transform: none;
+    transform: none;
+    -webkit-transition: none;
+    transition: none;
+}
+
+.pages-container .page-home {
+    display: block;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -moz-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+
+.pages-container .show-page {
+    z-index: 5;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.android-chrome .pages-container .show-page {
+    display: block;
+    -webkit-transform: none;
+    transform: none;
+}
+
+.pages-container .header-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+}
+
+.pages-container .pagebd-container {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.95);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.android-chrome .pages-container .pagebd-container {
+    -webkit-transform: translateZ(0);
+}
+
+.pagebd-container .bd {
+}
+
+.mobile {
+    position: absolute;
+    left: -100px;
+    width: 0;
+    height: 1px;
+    visibility: hidden;
+}
+
+@media only screen and (min-width : 768px) {
+
+    .mobile {
+        height: 1px;
+    }
+    .pages-container .page {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .pages-container .page-home {
+        width: 360px;
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .android-chrome .pages-container .page-home {
+        display: block;
+    }
+    .pages-container .page-about,
+    .pages-container .page-settings,
+    .pages-container .page-performance,
+    .pages-container .page-article-comments,
+    .pages-container .page-article-content {
+        left: 360px;
+    }
+}
+
+.page-home .bd li {
+    border-bottom: 1px solid  rgba(0,0,0,.07);
+    position: relative;
+
+}
+
+.page-home .bd a {
+    display: block;
+    color: #555;
+    padding: 5px 15px;
+}
+
+.page-home .bd .story {
+    padding: 10px 15px;
+    margin-right: 50px;
+}
+
+.page-home .bd .comments {
+    width: 50px;
+    background: rgba(0,0,0,0.031);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: #f60;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+    display:box;
+    box-pack:center;
+    box-align:center;
+}
+
+.page-home .bd .icon {
+    padding: 0;
+    opacity: 0.4;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.page-home .bd h3 {
+    margin: 0;
+    font-size: 107%;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.3;
+    padding-bottom: 5px;
+}
+
+.page-home .bd span {
+    display: inline-block;
+    padding: 5px;
+    font-weight: 300;
+    line-height: 1;
+    font-size: 93%;
+    white-space: pre;
+}
+
+.page-home .bd .points {
+    background: rgba(0,0,0,0.031);
+    border-radius: 3px;
+    padding: 5px 5px;
+}
+
+.page-home .bd .url {
+    display: block;
+    padding-left: 0;
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+}
+
+.page-home .active {
+    background: rgba(255,102,0,0.05);
+}
+
+.page-home .active .story {
+    padding-left: 10px;
+    border-left: 5px solid #f60;
+}
+
+.page-home .active .visited {
+    opacity: 1;
+}
+
+
+
+
+.article-meta {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.article-meta h3 {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 107%;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.3;
+}
+
+.article-meta span {
+    display: inline-block;
+    padding: 5px 5px;
+    font-weight: 300;
+    line-height: 1;
+    font-size: 93%;
+    white-space: pre;
+}
+
+.article-meta .url {
+    display: block;
+    margin-top: 5px;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.article-meta .points {
+    background: rgba(0,0,0,0.031);
+    border-radius: 3px;
+}
+
+.article-meta .text {
+    padding-top: 5px;
+}
+
+.article-meta .icon {
+    padding: 5px 5px 5px 0;
+    color: #aaa;
+}
+
+.article-meta.article-self-true .article-url {
+    display: none;
+}
+
+.page-article-content .article-content {
+    padding: 10px 15px;
+    background: #fff;
+    min-height: 60%;
+}
+
+.page-article-content .article-content img {
+    max-width: 100%;
+}
+
+
+
+.article-comments {
+    background: rgba(255,255,255,0.95);
+    overflow: hidden;
+    min-height: 60%;
+}
+
+.article-comments .time-ago {
+    display: inline-block;
+    padding: 7px 5px 10px;
+}
+.article-comments .author {
+    display: inline-block;
+    padding: 7px 10px 10px;
+    color: #f60;
+}
+.article-comments .icon {
+    padding: 8px 0 8px 5px;
+    opacity: 0.6;
+    vertical-align: middle;
+    font-size: 85%;
+}
+.article-comments .text {
+    padding: 5px 5px 5px 0;
+    vertical-align: middle;
+    line-height: 1;
+}
+.article-comments .op .icon {
+    display: none;
+}
+.article-comments .op .text {
+    padding-left: 5px;
+    margin-left: 5px;
+    background: #f60;
+    color: #fff;
+}
+.article-comments time {
+    color: #888;
+}
+.article-comments ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.article-comments li {
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+.article-comments ul ul {
+    border-left: 15px solid rgba(0,0,0,0.05);
+}
+.article-comments ul ul ul{
+    border-color: rgba(0,0,0,0.07);
+}
+.article-comments ul ul ul ul {
+    border-color: rgba(0,0,0,0.09);
+}
+.article-comments ul ul ul ul ul {
+    border-color: rgba(0,0,0,0.11);
+}
+.article-comments .comment {
+    padding: 0 15px 10px;
+    margin: -10px 0 0;
+}
+
+.hide-comment-visited .article-comments .comment-visited {
+    display: none;
+}
+
+.article-comments .comment a {
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.article-comments .comment p {
+    margin: 5px 0;
+}
+
+.page-performance .bd {
+    padding: 15px;
+}
+.page-performance .bd h4 {
+    margin: 5px 0;
+    border-bottom: 1px dotted #eee;
+}
+
+.page-settings h4 {
+    margin: 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.06);
+}
+
+.page-settings li {
+    position: relative;
+}
+
+.page-settings li a {
+    display: block;
+    padding: 10px 10px 10px 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.page-settings .selected:before {
+    content: '\2713';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    font-size: 121%;
+    line-height: 2.5;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.page-settings .version {
+    padding: 5px;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.page-about .ios-mobile,
+.page-about .ios-tablet,
+.page-about .wp8,
+.page-about .android-mobile
+{
+    position: static;
+    margin: 0 auto;
+    display: none;
+    width: 90%;
+}
+
+.android .page-about .wp8 {
+    display: block;
+}
+
+.android .page-about .android-mobile {
+    display: block;
+}
+
+.web .page-about .android-mobile {
+    display: block;
+    top: 20px;
+    left: 20px;
+    width: 35%;
+    z-index: 6;
+}
+
+.web .page-about .wp8 {
+    display: block;
+    top: 20px;
+    right: 20px;
+    width: 32%;
+    z-index: 5;
+}
+
+.web .page-about .ios-mobile {
+    display: block;
+    top: 20px;
+    left: 36.6%;
+    width: 26%;
+    z-index: 6;
+}
