@@ -1,7 +1,9 @@
 Hacker News mobile app
 ==
 
-#### http://hn.premii.com
+#### Web: http://hn.premii.com
+#### iOS: https://itunes.apple.com/us/app/hacker-news-yc/id713733435
+#### Android: https://play.google.com/store/apps/details?id=com.premii.hn
 
 ### lib.js contains
 
